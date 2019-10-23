@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <title>Input Data</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            nav{
+                background: rgb(82,82,82);
+                background: linear-gradient(0deg, rgba(82,82,82,1) 0%, rgba(240,240,240,1) 100%);
+        }
+            .container{
+                margin-top: 10px;
+                background-color: rgba(211, 211, 211, 0.849);
+                padding-bottom: 20px;
+                border-radius: 10px;
+            }
+            form{
+                margin-top: 25px;
+            }
+            h3{
+                margin-top: 20px;
+            }
+            #left{
+                border-left: solid;
+                border-color: black;
+                padding-bottom: 10px;
+            }
+            #wrapper{
+                background-image: url(http://getwallpapers.com/wallpaper/full/a/5/7/1112176-cash-money-wallpaper-1920x1080-full-hd.jpg);
+                padding-bottom: 100px;
+                padding-top: 10px;
+            }
+            #footer{
+                background: rgb(82,82,82);
+                background: linear-gradient(0deg, rgba(82,82,82,1) 0%, rgba(240,240,240,1) 100%);
+                width: 100%; 
+                height: 120px;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="/logout">{{stock.user.first_name}}'s App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/logout"><u>Sign Out</u> <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/business_dashboard/{{stock.id}}"><u>{{stock.name}} Dashboard</u> <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/user"><u>{{stock.user.first_name}}'s Dashboard</u> <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id='wrapper'>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h3>Input Numbers</h3>
+                    <form action='/input_data/{{stock.id}}' method='post'>
+                            {% csrf_token %}
+                        <div class="form-group">
+                                <label for="exampleInputEmail1">Sales</label>
+                                <input name='sales' type="text" class="form-control" id="exampleInputEmail1">
+                                <small>Input Month #'s separated by a comma.  I.e 4,2,4 </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Products</label>
+                                <input name='products' type="text" class="form-control" id="exampleInputEmail1">
+                                <small>Input Month #'s separated by a comma.  I.e 4,2,4 </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Employees</label>
+                                <input name='employees' type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <small>Input Month #'s separated by a comma.  I.e 4,2,4 </small>
+                            </div>
+                            <div class="form-group">
+                                <input name='busy' type='hidden' value='{{stock.id}}'>
+                            </div>
+                                <button type="submit" class="btn btn-primary">Input Data</button>
+                        </form>
+                </div>
+                <div id='left' class="col">
+                        <h3>Update Numbers</h3>
+                        <form action='/input_data/{{stock.id}}' method='post'>
+                                {% csrf_token %}
+                            <div class="form-group">
+                                    <label for="exampleInputEmail1">Sales</label>
+                                    <input name='sales' type="text" class="form-control" id="exampleInputEmail1">
+                                    <small>Input Month #'s separated by a comma.  I.e 4,2,4 </small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Products</label>
+                                    <input name='products' type="text" class="form-control" id="exampleInputEmail1">
+                                    <small>Input Month #'s separated by a comma.  I.e 4,2,4 </small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Employees</label>
+                                    <input name='employees' type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <small>Input Month #'s separated by a comma.  I.e 4,2,4 </small>
+                                </div>
+                                <div class="form-group">
+                                    <input name='busy' type='hidden' value='{{stock.id}}'>
+                                </div>
+                                    <button type="submit" class="btn btn-primary">Update Data</button>
+                            </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='footer'></div>
+    </body>
+</html>

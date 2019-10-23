@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Your Dashboard</title>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+        <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.highcharts.com/stock/highstock.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+        nav{
+            background: rgb(82,82,82);
+            background: linear-gradient(0deg, rgba(82,82,82,1) 0%, rgba(240,240,240,1) 100%);
+        }
+        .tradingview-widget-container{
+            margin-left: 70px;
+        }
+        #wrapper{
+            padding-bottom: 10px;
+            padding-top: 20px;
+            background-image: url(http://getwallpapers.com/wallpaper/full/a/5/7/1112176-cash-money-wallpaper-1920x1080-full-hd.jpg);
+        }
+        .row{
+            margin-top: 20px;
+        }
+        #footer{
+                        background: rgb(82,82,82);
+                        background: linear-gradient(0deg, rgba(82,82,82,1) 0%, rgba(240,240,240,1) 100%);
+                        width: 100%; 
+                        height: 80px;
+                    }
+            h3{
+                display: center;
+                text-align: center;
+                background: rgb(82,82,82);
+                background: linear-gradient(0deg, rgba(82,82,82,1) 0%, rgba(240,240,240,1) 100%);
+                border-radius: 10px;
+            }
+            .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: white;
+            }
+        .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+            }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="/logout">{{stock.name}} App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">Options 
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="/logout">Sign Out</a>
+                                <a href="/delete/{{stock.id}}">Delete Business Account</a>
+                                <a href="/data/{{stock.id}}">Change {{stock.name}} Data</a>
+                                <a href="/user">{{stock.user.first_name}}'s Dashboard</a>
+                            </div>
+                        </div> 
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="wrapper">
+        <div class="container">
+            <h3>{{stock.name}}</h3>
+                <div class="col-8">
+                    <div class="tradingview-widget-container">
+                        <div id="tradingview_30a92"></div>
+                            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/{{stock.stock_code}}/" rel="noopener" target="_blank"><span class="blue-text">AAPL Chart</span></a> by TradingView</div>
+                                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                                <script type="text/javascript">
+                            new TradingView.widget(
+                                {
+                                    "width": 980,
+                                    "height": 610,
+                                    "symbol": "{{stock.stock_code}}",
+                                    "interval": "D",
+                                    "timezone": "Etc/UTC",
+                                    "theme": "Light",
+                                    "style": "1",
+                                    "locale": "en",
+                                    "toolbar_bg": "#f1f3f6",
+                                    "enable_publishing": false,
+                                    "allow_symbol_change": true,
+                                    "container_id": "tradingview_30a92"
+                                }
+                                );
+                                </script>
+                </div>
+            </div>
+        </div>
+            
+            <div class="row">
+                <div class="col">
+                    <div id="bar_chart" style="width:100%; height:400px;"></div>
+                </div>
+                <div class="col">
+                    <div id="line_chart" style="width:100%; height:400px;"></div>
+                </div>
+                <div class="col">
+                    <div id="pie_chart" style="width:100%; height:400px;"></div>
+                </div>
+            </div>
+        
+            <script>
+                Highcharts.getJSON('https://www.highcharts.com/samples/data/aapl-c.json', function (data) {
+                Highcharts.stockChart('container', {
+                rangeSelector: {
+                    selected: 1
+                    },
+                title: {
+                    text: 'AAPL Stock Price'
+                    },
+                series: [{
+                    name: 'AAPL',
+                    data: data,
+                    tooltip: {
+                        valueDecimals: 2
+                        }
+                    }]
+                });
+                });
+            </script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                var myChart = Highcharts.chart('bar_chart', {
+                chart: {
+                    type: 'line'
+                     },
+                title: {
+                    text: 'Cash'
+                },
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', "Aug", 'Sept', 'Oct', 'Nov', 'Dec' ]
+                },
+                yAxis: {
+                    title: {
+                        text: '$$$'
+                    }
+                },
+                series: [{
+                 name: 'You',
+                    data: [{{data.0.products}}]
+                     }, {
+                        name: 'Average',
+                        data: [5, 7, 3,0,0,0]
+                    }]
+                });
+                });
+            </script>
+            <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                    var myChart = Highcharts.chart('line_chart', {
+                    chart: {
+                        type: 'line'
+                         },
+                    title: {
+                        text: 'Property Value'
+                    },
+                    xAxis: {
+                        categories: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', "Aug", 'Sept', 'Oct', 'Nov', 'Dec' ]
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Dollars (in millions)'
+                        }
+                    },
+                    series: [{
+                     name: 'You',
+                        data: [{{data.0.sales}}]
+                         }, {
+                        name: 'Average',
+                        data: [1, 0, 10,1,5,3,1]
+                        }]
+                    });
+                    });
+                </script>
+                <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                        var myChart = Highcharts.chart('pie_chart', {
+                        chart: {
+                            type: 'line'
+                             },
+                        title: {
+                            text: '401k Contributions'
+                        },
+                        xAxis: {
+                            categories: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', "Aug", 'Sept', 'Oct', 'Nov', 'Dec' ]
+                        },
+                        yAxis: {
+                            title: {
+                                text: '$$$'
+                            }
+                        },
+                        series: [{
+                         name: 'You',
+                            data: [{{data.0.employees}}]
+                             }, {
+                                name: 'Average',
+                                data: [1, 2, 3, 4,5,6,7]
+                            }]
+                        });
+                        });
+                    </script>
+            </div>
+            <div id='footer'></div>
+    </body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home Page</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+       <style>
+        .jumbotron{
+            margin-top: 10px;
+            background-color: rgba(211, 211, 211, 0.603);
+          
+        }
+        nav{
+            background: rgb(82,82,82);
+            background: linear-gradient(0deg, rgba(82,82,82,1) 0%, rgba(240,240,240,1) 100%);
+        }
+        .container-fluid{
+            background-image: url(http://getwallpapers.com/wallpaper/full/a/5/7/1112176-cash-money-wallpaper-1920x1080-full-hd.jpg);
+            padding-top: 10px;
+            padding-bottom: 100px;
+        }
+        .card{
+            border-radius: 10px;
+            background-color: rgba(211, 211, 211, 0.74);
+        }
+        .carousel{
+            margin-left: 240px;
+        }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: lightgray;
+            }
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: lightgray;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+
+            .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            }
+
+            .dropdown-content a:hover {
+            background-color: #ddd;
+            }
+
+            .dropdown:hover .dropdown-content {
+            display: block;
+            }
+            #footer{
+                background: rgb(82,82,82);
+                background: linear-gradient(0deg, rgba(82,82,82,1) 0%, rgba(240,240,240,1) 100%);
+                width: 100%; 
+                height: 120px;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="/">Personal Portfolio App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">What Would You Like to Do? 
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="/sign_in">Sign In</a>
+                                <a href="/create">Create An Account</a>
+                            </div>
+                        </div> 
+                    </li>
+                </ul>
+            </div>
+        </nav>   
+        <div class="container-fluid">
+            <div class="jumbotron">
+                <h1 class="display-4">Welcome to Your Personal Portfolio App!</h1>
+                <p class="lead">This is a simple app that can help you track you financial health and track your portfolio.</p>
+                <hr class="my-4">
+                <p>This is the only here to take up space for now.</p>
+                <a class="btn btn-primary btn-lg" href="/create" role="button">Create An Account Now!</a>
+            </div>
+            <div class='container'>
+                <div class="row">
+                        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active" data-interval="3000">
+                                    <div class="col">
+                                        <div class="card" style="width: 40rem;">
+                                            <div class="card-body">
+                                                <h5 class="card-title">See Your Assets</h5>
+                                                <h6 class="card-subtitle mb-2 text-muted">A Pie Chart</h6>
+                                                <p class="card-text">This feature will allow you to view all your assets in a pie graph.  You can input and change this data as well.</p>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                    See Example
+                                                </button>
+                                                <script>
+                                                    $('#myModal').on('shown.bs.modal', function () {
+                                                    $('#myInput').trigger('focus')
+                                                        })
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                  <div class="carousel-item" data-interval="3000">
+                                        <div class="col">
+                                                <div class="card" style="width: 40rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Track Your Stocks</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted">A Line Graph</h6>
+                                                        <p class="card-text">This feature allows you to pull up an interactive stock graph for each of your holdings that you input.</p>
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
+                                                                See Example
+                                                            </button>
+                                                            <script>
+                                                                $('#myModal').on('shown.bs.modal', function () {
+                                                                $('#myInput').trigger('focus')
+                                                                    })
+                                                            </script>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                  </div>
+                                  <div class="carousel-item" data-interval="3000">
+                                        <div class="col">
+                                                <div class="card" style="width: 40rem;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Business Charts</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted">Some Line Graphs</h6>
+                                                        <p class="card-text">A few charts that you can use to track your business data.  This includes, sales, products, and employees.</p>
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal3">
+                                                                See Example
+                                                            </button>
+                                                            <script>
+                                                                $('#myModal').on('shown.bs.modal', function () {
+                                                                $('#myInput').trigger('focus')
+                                                                    })
+                                                            </script>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                  </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Next</span>
+                                </a>
+                              </div>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Pie Chart</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                        <div id="chart" style="min-width: 300px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                                </div>
+                                <div class="modal-footer">
+                                  <a class="btn btn-secondary" href='/create'>Create An Account</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Stock Graph</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id='screen' class="tradingview-widget-container">
+                                            <div id="tradingview_46cee"></div>
+                                            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank"><span class="blue-text">AAPL Chart</span></a> by TradingView</div>
+                                            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                                            <script type="text/javascript">
+                                            new TradingView.widget(
+                                            {
+                                            "width": 400,
+                                            "height": 300,
+                                            "symbol": "NASDAQ:AAPL",
+                                            "interval": "D",
+                                            "timezone": "Etc/UTC",
+                                            "theme": "Light",
+                                            "style": "1",
+                                            "locale": "en",
+                                            "toolbar_bg": "#f1f3f6",
+                                            "enable_publishing": false,
+                                            "hide_top_toolbar": true,
+                                            "hide_legend": true,
+                                            "save_image": false,
+                                            "container_id": "tradingview_46cee"
+                                        }
+                                            );
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <a class="btn btn-secondary" href='/create'>Create An Account</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Line Graph</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                                <div id="bar_chart" style="width:100%; height:400px;"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <a class="btn btn-secondary" href='/create'>Create An Account</a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                </div>
+            </div>
+        </div>
+        <script>
+                Highcharts.chart('chart', {
+              chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+              },
+              title: {
+                text: 'Retirement Portfolio'
+              },
+              tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+              },
+              plotOptions: {
+                pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                  }
+                }
+              },
+              series: [{
+                name: 'Percentage of Total Wealth',
+                colorByPoint: true,
+                data: [{
+                  name: 'Asset One',
+                  y: 33.3,
+                  
+                  selected: true
+                }, {
+                  name: 'Asset Two',
+                  y: 33.3
+                }, {
+                  name: 'Asset Three',
+                  y: 33.3
+                }, {
+                 
+                }, {
+               
+                }, {
+                 
+                }, {
+                 
+                }, {
+                 
+                }, {
+                  
+                }]
+              }]
+            });
+                </script>
+                <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                        var myChart = Highcharts.chart('bar_chart', {
+                        chart: {
+                            type: 'line'
+                             },
+                        title: {
+                            text: 'Products'
+                        },
+                        xAxis: {
+                            categories: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', "Aug", 'Sept', 'Oct', 'Nov', 'Dec' ]
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'New Products'
+                            }
+                        },
+                        series: [{
+                         name: 'Your Company',
+                            data: [8,12,5]
+                             }, {
+                                name: 'Top Competitors',
+                                data: [5, 7, 3]
+                            }]
+                        });
+                        });
+                    </script>
+        <div id='footer'></div>
+    </body>
+</html>

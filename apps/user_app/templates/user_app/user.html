@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Your Dashboard</title>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+        <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+        .navbar{
+            margin-bottom: 0px;
+            background: rgb(82,82,82);
+            background: linear-gradient(0deg, rgba(82,82,82,1) 0%, rgba(240,240,240,1) 100%);
+        }
+        .row{
+            margin-bottom: 20px;
+        }
+        .card{
+            margin-top: 10px;
+        }
+        .col-4{
+            background-color: rgba(131, 131, 131, 0.836);
+            padding-bottom: 25px;
+        }
+        #space{
+            background-color: rgba(131, 131, 131, 0.836);
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 20px;
+        }
+        .card{
+            display: inline-block;
+            margin: 5px 10px 5px;
+        }
+        #wrapper{
+            background-image: url(http://getwallpapers.com/wallpaper/full/a/5/7/1112176-cash-money-wallpaper-1920x1080-full-hd.jpg);
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .jumbotron{
+            background-color: rgba(131, 131, 131, 0.836);
+        }
+        #retire{
+            display: inline-block;
+            height: 100px;
+            width: 400px;
+            margin-left: 50px;
+        }
+        #stuff{
+            margin-left: 200px;
+            margin-top: 10px;
+        }
+        .white{
+            color: white;
+        }
+        #footer{
+                background: rgb(82,82,82);
+                background: linear-gradient(0deg, rgba(82,82,82,1) 0%, rgba(240,240,240,1) 100%);
+                width: 100%; 
+                height: 80px;
+                margin-top: 0px;
+            }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: white;
+            }
+        .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+            }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            }
+            #ticker{
+                background-color: white;
+                height: 18%;
+                width: 95%;
+                margin: auto;
+                margin-top: 10px;
+                padding: 5px;
+                border-radius: 5px;
+            }
+            #daily{
+                text-align: center;
+            }
+            #news_feed{
+                border-top: solid;
+                border-color: black;
+
+            }
+        </style>
+        </head>
+        <body>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="/logout'">{{user.first_name}} {{user.last_name}}'s Dashboard</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="dropdown">
+                    <button class="dropbtn">Options 
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                      <a href="/logout">Sign Out</a>
+                      <a href="/change_retire_data/{{user.id}}">Update Retirement Data</a>
+                      <a href="/create">Create A New Account</a>
+                    </div>
+            </div> 
+        </nav>
+        <div id='wrapper'>
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-4">Welcome {{user.first_name}}!</h1>
+                            <p class="lead">What Would You like To Do Today?</p>
+                            <div id='retire'><div id="container" style="min-width: 600px; height: 400px; max-width: 600px; margin: 0 auto"></div></div>
+                            <div id="stuff">
+                                <button class='btn btn-primary'><a class='white' href="/change_retire_data/{{user.id}}">Change Retirement Data</a></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id='space' >
+                            {% for i in biz %}
+                        <div class="card" style="width: 15rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{i.name}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{i.email}}</h6>
+                                <a href="/business_dashboard/{{i.id}}" class="card-link">View Business</a>
+                             </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-4">
+                    <h2>Own A Stock?</h2>
+                    <h5>Track It Here!</h5>
+                    <form action='/create_biz' method='post'>
+                            {% csrf_token %}
+                        <div class="form-group">
+                                <label for="exampleInputEmail1">Business Name:</label>
+                                <input required='true' name='biz_title' type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Business Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address:</label>
+                            <input required='true' name='biz_email' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ticker Symbol:</label>
+                            <input  name='biz_label' type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Stock Ticker">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Market:</label>
+                            <input name='market' type="text" class="form-control" id="exampleInputEmail1" placeholder="NYSE or NSADAQ">
+                        </div>
+                        <div class='form-group'>
+                            <input name='user_id' type='hidden' value='{{user.id}}'>
+                        </div>
+                        <div class='form-group'>
+                            <button type='submit' class='btn btn-primary'>Create</button>
+                        </div>
+                    </form>
+                    <div id='news_feed'>
+                        <h2 id='daily'>Daily News Feed</h2>
+                        <div id='ticker'>
+                       <h3><a href='{{news.articles.0.url}}'>{{news.articles.0.title}}</a></h3>
+                        <p>{{news.articles.0.description}}</p>
+                        
+                    </div>
+                    <div id='ticker'>
+                        <h3><a href='{{news.articles.1.url}}'>{{news.articles.1.title}}</a></h3>
+                        <p>{{news.articles.1.description}}</p>
+                       
+                    </div>
+                    <div id='ticker'>
+                        <h3><a href='{{news.articles.2.url}}'>{{news.articles.2.title}}</a></h3>
+                        <p>{{news.articles.2.description}}</p>
+                        
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">    
+            </div>
+        </div>
+    </div>
+    <script>
+    Highcharts.chart('container', {
+  chart: {
+    plotBackgroundColor: null,
+    plotBorderWidth: null,
+    plotShadow: false,
+    type: 'pie'
+  },
+  title: {
+    text: 'Retirement Portfolio'
+  },
+  tooltip: {
+    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+  },
+  plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: true,
+        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+      }
+    }
+  },
+  series: [{
+    name: 'Percentage of Total Wealth',
+    colorByPoint: true,
+    data: [{
+      name: '{{port.asset_one}}',
+      y: {{port.asset_one_percentage}},
+      
+      selected: true
+    }, {
+      name: '{{port.asset_two}}',
+      y: {{port.asset_two_percentage}}
+    }, {
+      name: '{{port.asset_three}}',
+      y: {{port.asset_three_percentage}}
+    }, {
+     
+    }, {
+   
+    }, {
+     
+    }, {
+     
+    }, {
+     
+    }, {
+      
+    }]
+  }]
+});
+    </script>
+    <div id='footer'></div> 
+    </body>
